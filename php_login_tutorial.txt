@@ -1,0 +1,25 @@
+PHP login tutorial
+-------------------
+
+0. Use includes for header and footer, and any other repetitive code
+
+1. Create a table to hold user data
+2. Create a user class: atributes, constructor, minimal setter/getter methods
+3. From a php script, connect to the database and include the User class
+
+4. Create a form for user login
+5. Experiment with submission methods and resulting varibles: POST and GET
+   Your form elements need to have a name attribute, which will be the key for the
+   POST or GET variables value
+
+6. Retrieve a particular user by login, loading an object from the database
+7. Check if the user's password match with the input from the form
+8. If the passowrd is correct, set a session variable user_id
+9. Print the user_id in other pages, to check if it is properly set
+
+10. Create a logout page that says "Goodbye, user_name"
+
+11. Create a form for user subscription (use the cars demo as a reference)
+12. Load a user object and insert it to the database
+
+
