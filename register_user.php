@@ -15,12 +15,12 @@ if (isset($_POST['submit'])){
     $user->saveUser();
 
     if ($user->getId()){
-        $_SESSION['user_id'] = User::getUserByLogin($user->getLogin())->getId();
+        $_SESSION['user_id'] = $user->getId();
         header("Location: index.php");
     } else {
         $error = "Error: could not create user";
     }
-} 
+}
 
 include("header.php");
 
@@ -50,7 +50,7 @@ include("header.php");
       </div>
     </div>
 
-<?php 
+<?php
 
 include("footer.php");
 

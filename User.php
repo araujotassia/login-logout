@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require("config.php");
 
@@ -41,20 +41,21 @@ class User {
     function getPassword(){
         return $this->password_hash;
     }
-    
+
     function checkPassword($password){
         echo "Checking...";
         echo "pass:".$password;
         echo "hash:".$this->password_hash;
         return (password_verify($password,$this->password_hash));
     }
-    
+
     function saveUser(){
         try {
             global $pdo;
             echo "<br />OBJ";
             print_r((array)$this);
 
+            // Insert to the database
             $stmt = $pdo->prepare('INSERT INTO Users (id, login, first_name, last_name, password_hash) VALUES (:id, :login, :first_name, :last_name, :password_hash)');
             $stmt->execute((array)$this);
 
@@ -66,7 +67,7 @@ class User {
            // $stmt = $pdo->prepare('INSERT INTO Users (id, login, first_name, last_name, password_hash) VALUES (?,?,?,?,?)');
            // $stmt->execute([$this->id,$this->login,$this->first_name,$this->last_name,$this->password_hash]);
 
-            // After saving the user to the database, fill in the user id
+            // After saving the user to the database, fill in the user object id
             $user_from_db = $this->getUserByLogin($this->login);
             $this->id = $user_from_db->id;
 
@@ -82,7 +83,7 @@ class User {
             $stmt = $pdo->prepare("SELECT * FROM Users WHERE login=:login");
             $stmt->bindParam(':login',$login);
             $stmt->execute();
-            // Fetch the result into a user object 
+            // Fetch the result into a user object
             $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,"User");
             $user = $stmt->fetch();
             // Alternative method, fetching into an associative array
@@ -96,7 +97,7 @@ class User {
 	    return -1;
         }
     }
-    
+
     public static function getUserById($id){
         try {
             global $pdo;
